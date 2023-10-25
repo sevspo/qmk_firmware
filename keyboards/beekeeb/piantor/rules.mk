@@ -1,1 +1,3 @@
 SERIAL_DRIVER = vendor
+
+UNICODEMAP_ENABLE = yes
