@@ -87,16 +87,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [3] = LAYOUT_split_3x6_3(
-        KC_ESC,         KC_BRIU,        KC_WSCH,        KC_WBAK,        KC_WFWD,        KC_WREF,        KC_X,        KC_HOME,        KC_UP,        KC_END,        KC_PGUP,        KC_PPLS,
-        KC_TRNS,        LALT_T(KC_BRID),        LSFT_T(KC_TRNS),        LCTL_T(KC_MUTE),        KC_MPLY,        KC_VOLU,        KC_C,        KC_LEFT,        KC_DOWN,        KC_RGHT,        KC_PGDN,        KC_PMNS,
-        KC_TRNS,        SGUI(KC_S),        LGUI(KC_E),        KC_MSTP,        KC_MFFD,        KC_VOLD,        KC_V,        KC_Z,        KC_Y,        KC_APP,        QK_BOOT,        KC_DEL,
-        KC_TRNS,        LCA_T(KC_TRNS),        C_S_T(KC_TRNS),        KC_ENT,        KC_SPC,        KC_BSPC
+        KC_ESC,         KC_BRIU,        KC_WSCH,        KC_WBAK,        KC_WFWD,        KC_WREF,        KC_X,           KC_HOME,         KC_UP,         KC_END,        KC_PGUP,        KC_PPLS,
+        KC_TRNS,        LALT_T(KC_BRID),LSFT_T(KC_TRNS),LCTL_T(KC_MUTE),KC_MPLY,        KC_VOLU,        KC_C,           KC_LEFT,         KC_DOWN,       KC_RGHT,       KC_PGDN,        KC_PMNS,
+        KC_TRNS,        SGUI(KC_S),     LGUI(KC_E),     KC_MSTP,        KC_MFFD,        KC_VOLD,        KC_V,           KC_Z,            KC_Y,          KC_APP,        QK_BOOT,        KC_DEL,
+                                                        KC_TRNS,        LCA_T(KC_TRNS), C_S_T(KC_TRNS), KC_ENT,         KC_SPC,          KC_BSPC
     ),
 
     [4] = LAYOUT_split_3x6_3(
-        KC_NO,          KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,
-        KC_NO,          UM(POOP),        LSFT_T(UM(CRY)),        UM(WINK),        UM(FISTBOX),        UM(EXPLODE),        KC_NO,        UP(DESAE, DEBAE),        UP(DESOE, DEBOE),        UP(DESUE, DEBUE),        KC_E,        KC_NO,
-        KC_NO,          KC_NO,        KC_NO,        KC_NO,        KC_NO,        UM(SMILE),        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,        KC_NO,
-        KC_F12,         KC_NO,      KC_TAB,       KC_ENT,       KC_SPC,        KC_BSPC
+        KC_NO,          KC_NO,           KC_NO,           KC_NO,        KC_NO,          KC_NO,            KC_NO,        KC_NO,            KC_NO,            KC_NO,            KC_NO,        KC_NO,
+        KC_NO,          UM(POOP),        LSFT_T(UM(CRY)), UM(WINK),     UM(FISTBOX),    UM(EXPLODE),      KC_NO,        UP(DESAE, DEBAE), UP(DESOE, DEBOE), UP(DESUE, DEBUE), KC_E,         KC_NO,
+        KC_NO,          KC_NO,           KC_NO,           KC_NO,        KC_NO,          UM(SMILE),        KC_NO,        KC_NO,            KC_NO,            KC_NO,            KC_NO,        KC_NO,
+                                                          KC_F12,       KC_NO,          KC_TAB,           KC_ENT,       KC_SPC,           KC_BSPC
     )
 };
