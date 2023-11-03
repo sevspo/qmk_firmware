@@ -74,9 +74,12 @@ enum tab_dance_names {
     TD_O_RBRC,
     TD_QUOT_GRV,
     TD_P_ARRF,
+    TD_Z_AND,
+    TD_X_OR,
+    TD_Q_3EQ,
 };
 
-void p_arr_finished (qk_tap_dance_state_t *state, void *user_data) {
+void p_arr_finished (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         register_code(KC_P);
     } else if (state->count == 2) {
@@ -84,9 +87,51 @@ void p_arr_finished (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void p_arr_reset (qk_tap_dance_state_t *state, void *user_data) {
+void p_arr_reset (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         unregister_code(KC_P);
+    }
+}
+
+void z_and_finished (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code(KC_Z);
+    } else if (state->count == 2) {
+        SEND_STRING("&&");
+    }
+}
+
+void z_and_reset (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_Z);
+    }
+}
+
+void x_or_finished (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code(KC_X);
+    } else if (state->count == 2) {
+        SEND_STRING("||");
+    }
+}
+
+void x_or_reset (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_X);
+    }
+}
+
+void q_equal_finished (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code(KC_Q);
+    } else if (state->count == 2) {
+        SEND_STRING("===");
+    }
+}
+
+void q_equal_reset (tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_Q);
     }
 }
 
@@ -104,7 +149,10 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_I_RCBR] = ACTION_TAP_DANCE_DOUBLE(KC_I, KC_RCBR),
     [TD_O_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_O, KC_RBRC),
     [TD_QUOT_GRV] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
-    [TD_P_ARRF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, p_arr_finished, p_arr_reset)
+    [TD_P_ARRF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, p_arr_finished, p_arr_reset),
+    [TD_Z_AND] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, z_and_finished, z_and_reset),
+    [TD_X_OR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_or_finished, x_or_reset),
+    [TD_Q_3EQ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, q_equal_finished, q_equal_reset),
 };
 
 
@@ -125,25 +173,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       */
 
     [0] = LAYOUT_split_3x6_3(
-        KC_ESC,         KC_Q,           TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  TD(TD_P_ARRF),  TD(TD_DASH_EQ),
+        KC_ESC,         TD(TD_Q_3EQ),   TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  TD(TD_P_ARRF),  TD(TD_DASH_EQ),
         LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(3,KC_F),     LT(1,KC_G),     LT(3,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
-        LCTL(KC_V),     KC_Z,           KC_X,           LGUI_T(KC_C),   LT(2,KC_V),     LT(4,KC_B),     LT(4,KC_N),     LT(2,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
+        LCTL(KC_V),     TD(TD_Z_AND),   TD(TD_X_OR),    LGUI_T(KC_C),   LT(1,KC_V),     LT(4,KC_B),     LT(4,KC_N),     LT(1,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
                                                         TD(TD_CTRLS_C), LCA(KC_N),      KC_TAB,         KC_ENT,         TD(TD_JUMP_ONE),KC_BSPC
     ),
 
     [1] = LAYOUT_split_3x6_3(
-        KC_ESC,         KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_NO,          KC_7,           KC_8,          KC_9,            KC_BSLS,        KC_TRNS,
-        KC_TRNS,        LALT_T(KC_F6),  LSFT_T(KC_F7),  LCTL_T(KC_F8),  KC_F9,          KC_F10,         KC_NO,          KC_4,           RCTL_T(KC_5),  RSFT_T(KC_6),    RALT_T(KC_GRV), KC_TRNS,
+        KC_ESC,         KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_EXLM,        KC_7,           KC_8,          KC_9,            KC_BSLS,        KC_TRNS,
+        KC_TRNS,        LALT_T(KC_F6),  LSFT_T(KC_F7),  LCTL_T(KC_F8),  KC_F9,          KC_F10,         KC_AT,          KC_4,           RCTL_T(KC_5),  RSFT_T(KC_6),    RALT_T(KC_GRV), KC_TRNS,
         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_F11,         KC_F12,         KC_0,           KC_1,           KC_2,          KC_3,            KC_TRNS,        KC_TRNS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_ENT,         KC_TRNS,        KC_TRNS
     ),
 
-    [2] = LAYOUT_split_3x6_3(
-        KC_ESC,         KC_PERC,        KC_CIRC,        KC_PIPE,        KC_AMPR,        KC_ASTR,        KC_LT,          KC_LBRC,        KC_RBRC,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_HASH,        KC_AT,          KC_EXLM,        KC_DLR,         KC_GT,          KC_LCBR,        KC_RCBR,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_LPRN,        KC_RPRN,        KC_TRNS,        KC_TRNS,        KC_TRNS,
-                                                        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_ENT,         KC_TRNS,        KC_TRNS
-    ),
+    // [2] = LAYOUT_split_3x6_3(
+    //     KC_ESC,         KC_PERC,        KC_CIRC,        KC_PIPE,        KC_AMPR,        KC_ASTR,        KC_LT,          KC_LBRC,        KC_RBRC,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+    //     KC_TRNS,        KC_TRNS,        KC_HASH,        KC_AT,          KC_EXLM,        KC_DLR,         KC_GT,          KC_LCBR,        KC_RCBR,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+    //     KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_LPRN,        KC_RPRN,        KC_TRNS,        KC_TRNS,        KC_TRNS,
+    //                                                     KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_ENT,         KC_TRNS,        KC_TRNS
+    // ),
 
     [3] = LAYOUT_split_3x6_3(
         KC_ESC,         KC_BRIU,        KC_WSCH,        KC_WBAK,        KC_WFWD,        KC_WREF,        RCTL(KC_X),     KC_HOME,         KC_UP,         KC_END,         KC_PGUP,        KC_PPLS,
