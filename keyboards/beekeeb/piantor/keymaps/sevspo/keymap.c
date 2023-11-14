@@ -106,13 +106,13 @@ td_state_t cur_dance(tap_dance_state_t *state) {
   return TD_NONE;
 }
 
-TD_Q_3EQ
+// TD_Q_3EQ
 void td_q_3eq_finished(tap_dance_state_t *state, void *user_data) {
   tab_state.state = cur_dance(state);
   switch (tab_state.state) {
       case TD_SINGLE_TAP: register_code(KC_Q); break;
       case TD_DOUBLE_TAP: register_code(KC_Q); register_code(KC_Q); break;
-      case TD_SINGLE_HOLD: SEND_STRING("===") break;
+      case TD_SINGLE_HOLD: SEND_STRING("==="); break;
       default: break;
   }
 }
@@ -325,12 +325,12 @@ void td_b_and_finished(tap_dance_state_t *state, void *user_data) {
   }
 }
 
-td_void td_b_and_reset(tap_dance_state_t *state, void *user_data) {
+void td_b_and_reset(tap_dance_state_t *state, void *user_data) {
   switch (tab_state.state) {
       case TD_SINGLE_TAP: unregister_code(KC_B); break;
       case TD_DOUBLE_TAP: unregister_code(KC_B); unregister_code(KC_B); break;
       default: break;
-  }
+    }
   tab_state.state = TD_NONE;
 }
 
@@ -384,7 +384,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_P_ARRF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_p_arrf_finished, td_p_arrf_reset),
     [TD_QUOT_GRV] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
     [TD_B_AND] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_b_and_finished, td_b_and_reset),
-    [TD_N_OR] = ACTION_TAP_DANCE_FN_ADVANCED(td_NULL, td_n_or_finished, td_n_or_reset),
+    [TD_N_OR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_n_or_finished, td_n_or_reset),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
