@@ -73,7 +73,22 @@ enum tab_dance_names {
     TD_I_RCBR,
     TD_O_RBRC,
     TD_QUOT_GRV,
+    TD_P_ARRF,
 };
+
+void p_arr_finished (qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code(KC_P);
+    } else if (state->count == 2) {
+        SEND_STRING("=>");
+    }
+}
+
+void p_arr_reset (qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code(KC_P);
+    }
+}
 
 tap_dance_action_t tap_dance_actions[] = {
     [TD_CTRLS_C] = ACTION_TAP_DANCE_DOUBLE(KC_F12, RCS(KC_C)),
@@ -89,6 +104,7 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_I_RCBR] = ACTION_TAP_DANCE_DOUBLE(KC_I, KC_RCBR),
     [TD_O_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_O, KC_RBRC),
     [TD_QUOT_GRV] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
+    [TD_P_ARRF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, p_arr_finished, p_arr_reset)
 };
 
 
@@ -109,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       */
 
     [0] = LAYOUT_split_3x6_3(
-        KC_ESC,         KC_Q,           TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  KC_P,           TD(TD_DASH_EQ),
+        KC_ESC,         KC_Q,           TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  TD(TD_P_ARRF),  TD(TD_DASH_EQ),
         LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(3,KC_F),     LT(1,KC_G),     LT(3,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
         LCTL(KC_V),     KC_Z,           KC_X,           LGUI_T(KC_C),   LT(2,KC_V),     LT(4,KC_B),     LT(4,KC_N),     LT(2,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
                                                         TD(TD_CTRLS_C), LCA(KC_N),      KC_TAB,         KC_ENT,         TD(TD_JUMP_ONE),KC_BSPC
