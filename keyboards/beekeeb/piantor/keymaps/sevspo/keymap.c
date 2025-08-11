@@ -74,8 +74,10 @@ enum tab_dance_names {
     TD_O_RBRC,
     TD_QUOT_GRV,
     TD_P_ARRF,
-    TD_Z_AND,
-    TD_X_OR,
+    // TD_Z_AND,
+    TD_B_AND,
+    // TD_X_OR,
+    TD_N_OR,
     TD_Q_3EQ,
 };
 
@@ -93,31 +95,59 @@ void p_arr_reset (tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void z_and_finished (tap_dance_state_t *state, void *user_data) {
+// void z_and_finished (tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 1) {
+//         register_code(KC_Z);
+//     } else if (state->count == 2) {
+//         SEND_STRING("&&");
+//     }
+// }
+
+// void z_and_reset (tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 1) {
+//         unregister_code(KC_Z);
+//     }
+// }
+
+void b_and_finished (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        register_code(KC_Z);
+        register_code(KC_B);
     } else if (state->count == 2) {
         SEND_STRING("&&");
     }
 }
 
-void z_and_reset (tap_dance_state_t *state, void *user_data) {
+void b_and_reset (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        unregister_code(KC_Z);
+        unregister_code(KC_B);
     }
 }
 
-void x_or_finished (tap_dance_state_t *state, void *user_data) {
+// void x_or_finished (tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 1) {
+//         register_code(KC_X);
+//     } else if (state->count == 2) {
+//         SEND_STRING("||");
+//     }
+// }
+
+// void x_or_reset (tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 1) {
+//         unregister_code(KC_X);
+//     }
+// }
+
+void n_or_finished (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        register_code(KC_X);
+        register_code(KC_N);
     } else if (state->count == 2) {
         SEND_STRING("||");
     }
 }
 
-void x_or_reset (tap_dance_state_t *state, void *user_data) {
+void n_or_reset (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        unregister_code(KC_X);
+        unregister_code(KC_N);
     }
 }
 
@@ -150,8 +180,10 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_O_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_O, KC_RBRC),
     [TD_QUOT_GRV] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_GRV),
     [TD_P_ARRF] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, p_arr_finished, p_arr_reset),
-    [TD_Z_AND] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, z_and_finished, z_and_reset),
-    [TD_X_OR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_or_finished, x_or_reset),
+    // [TD_Z_AND] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, z_and_finished, z_and_reset),
+    [TD_B_AND] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, b_and_finished, b_and_reset),
+    // [TD_X_OR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, x_or_finished, x_or_reset),
+    [TD_N_OR] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, n_or_finished, n_or_reset),
     [TD_Q_3EQ] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, q_equal_finished, q_equal_reset),
 };
 
@@ -174,8 +206,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
         KC_ESC,         TD(TD_Q_3EQ),   TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  TD(TD_P_ARRF),  TD(TD_DASH_EQ),
-        LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(3,KC_F),     LT(1,KC_G),     LT(3,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
-        LCTL(KC_V),     TD(TD_Z_AND),   TD(TD_X_OR),    LGUI_T(KC_C),   LT(1,KC_V),     LT(4,KC_B),     LT(4,KC_N),     LT(1,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
+        LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(3,KC_F),     LT(4,KC_G),     LT(4,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
+        LCTL(KC_V),     KC_Z,           KC_X,           LGUI_T(KC_C),   LT(1,KC_V),     TD(TD_B_AND),   TD(TD_N_OR),    LT(3,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
                                                         TD(TD_CTRLS_C), LCA(KC_N),      KC_TAB,         KC_ENT,         TD(TD_JUMP_ONE),KC_BSPC
     ),
 
