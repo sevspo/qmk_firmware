@@ -1,3 +1,5 @@
 SERIAL_DRIVER = vendor
 
 UNICODEMAP_ENABLE = yes
+
+TAP_DANCE_ENABLE = yes

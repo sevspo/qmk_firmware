@@ -31,6 +31,10 @@ enum unicode_names {
     FRIES,
 };
 
+enum tab_dance_names {
+  TD_CTRLS_C = 0,
+};
+
 const uint32_t PROGMEM unicode_map[] = {
     [DEBAE] = 0x00C4,  // Ä
     [DESAE] = 0x00E4, // ä
@@ -59,6 +63,11 @@ const uint32_t PROGMEM unicode_map[] = {
     [FRIES] = 0x1F35F,
 };
 
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_CTRLS_C] = ACTION_TAP_DANCE_DOUBLE(KC_F12, RCS(KC_C)),
+};
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      /*
       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
@@ -79,13 +88,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_MINS,
         LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(3,KC_F),     LT(1,KC_G),     LT(3,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),KC_QUOT,
         LCTL(KC_V),     KC_Z,           KC_X,           KC_C,           LT(2,KC_V),     LT(4,KC_B),     LT(4,KC_N),     LT(2,KC_M),     RGUI_T(KC_COMM),KC_DOT,         KC_SLSH,        KC_UNDS,
-                                                        KC_F12,         LCA(KC_N),      KC_TAB,         KC_ENT,         KC_SPC,         KC_BSPC
+                                                        TD(TD_CTRLS_C),         LCA(KC_N),      KC_TAB,         KC_ENT,         KC_SPC,         KC_BSPC
     ),
 
     [1] = LAYOUT_split_3x6_3(
         KC_ESC,         KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_LBRC,        KC_7,           KC_8,          KC_9,            KC_EQL,         KC_MINS,
-        KC_TRNS,        LALT_T(KC_F6),  LSFT_T(KC_F7),  LCTL_T(KC_F8),  KC_F9,          KC_F10,         KC_RBRC,        KC_4,           RCTL_T(KC_5),  RSFT_T(KC_6),    RALT_T(KC_0),   KC_BSLS,
-        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_F10,         KC_F12,         KC_GRV,         KC_1,           KC_2,          KC_3,            KC_SLSH,        KC_UNDS,
+        KC_TRNS,        LALT_T(KC_F6),  LSFT_T(KC_F7),  LCTL_T(KC_F8),  KC_F9,          KC_F10,         KC_RBRC,        KC_4,           RCTL_T(KC_5),  RSFT_T(KC_6),    RALT_T(KC_GRV),   KC_BSLS,
+        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_F10,         KC_F12,         KC_0,           KC_1,           KC_2,          KC_3,            KC_SLSH,        KC_UNDS,
                                                         KC_TRNS,        KC_TRNS,        KC_TRNS,        KC_ENT,         KC_SPC,         KC_BSPC
     ),
 
@@ -107,6 +116,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         UM(HEARNOEVIL),         UM(SKULL),       UM(ASTONISHED),  UM(HEART),    UM(ROBOT),      UM(HEXPLODE),     KC_NO,        DEBAE,            DEBOE,            DEBUE,            KC_NO,        KC_NO,
         UM(SEENOEVIL),          UM(POOP),        UM(CRY),         UM(WINK),     UM(FISTBOX),    UM(EXPLODE),      KC_NO,        UP(DESAE, DEBAE), UP(DESOE, DEBOE), UP(DESUE, DEBUE), KC_E,         KC_NO,
         UM(SPEAKNOEVIL),        KC_LSFT,         UM(FRIES),       UM(BUG),      UM(GRIMACE),    UM(SMILE),        KC_NO,        KC_NO,            KC_NO,            KC_NO,            KC_NO,        KC_NO,
-                                                                  KC_F12,       KC_NO,          KC_TAB,           KC_ENT,       KC_SPC,           KC_BSPC
+                                                                  TD(TD_CTRLS_C),       KC_NO,          KC_TAB,           KC_ENT,       KC_SPC,           KC_BSPC
     )
 };
