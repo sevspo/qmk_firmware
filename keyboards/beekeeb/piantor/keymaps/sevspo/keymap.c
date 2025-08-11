@@ -83,6 +83,7 @@ typedef enum {
   TD_NONE,
   TD_SINGLE_TAP,
   TD_DOUBLE_TAP,
+  TD_TRIPLE_TAP,
   TD_SINGLE_HOLD
 } td_state_t;
 
@@ -102,6 +103,8 @@ td_state_t cur_dance(tap_dance_state_t *state) {
   } else if (state->count == 2) {
       if (!state->pressed) return TD_DOUBLE_TAP;
       else return TD_SINGLE_HOLD;
+  } else if (state->count == 3) {
+      return TD_TRIPLE_TAP;
   }
   return TD_NONE;
 }
@@ -154,6 +157,7 @@ void td_e_lcbr_finished(tap_dance_state_t *state, void *user_data) {
       case TD_SINGLE_TAP: register_code(KC_E); break;
       case TD_DOUBLE_TAP: register_code(KC_E); register_code(KC_E); break;
       case TD_SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_LBRC); break;
+      case TD_TRIPLE_TAP: SEND_STRING("{{"); break;
       default: break;
   }
 }
@@ -259,6 +263,7 @@ void td_i_rcbr_finished(tap_dance_state_t *state, void *user_data) {
       case TD_SINGLE_TAP: register_code(KC_I); break;
       case TD_DOUBLE_TAP: register_code(KC_I); register_code(KC_I); break;
       case TD_SINGLE_HOLD: register_code(KC_LSFT); register_code(KC_RBRC); break;
+      case TD_TRIPLE_TAP: SEND_STRING("}}"); break;
       default: break;
   }
 }
