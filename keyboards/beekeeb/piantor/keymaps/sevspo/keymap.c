@@ -394,18 +394,17 @@ tap_dance_action_t tap_dance_actions[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      /*
-      * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-      * │Tab│ Q │ W │ E │ R │ T │       │ Y │ U │ I │ O │ P │Bsp│
-      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-      * │Ctl│ A │ S │ D │ F │ G │       │ H │ J │ K │ L │ ; │ ' │
-      * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-      * │Sft│ Z │ X │ C │ V │ B │       │ N │ M │ , │ . │ / │Sft│
-      * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-      *               ┌───┐                   ┌───┐
-      *               │GUI├───┐           ┌───┤Alt│
-      *               └───┤Bsp├───┐   ┌───┤Ent├───┘
-      *                   └───┤   │   │   ├───┘
-      *                       └───┘   └───┘
+      * Layer 0: Base Layer (QWERTY with tap dances and mod-taps)
+      * ┌─────┬─────┬─────┬─────┬─────┬─────┐       ┌─────┬─────┬─────┬─────┬─────┬─────┐
+      * │ Esc │Q/===│ W/[ │ E/{ │ R/( │ T/< │       │ Y/> │ U/) │ I/} │ O/] │P/=> │ -/= │
+      * ├─────┼─────┼─────┼─────┼─────┼─────┤       ├─────┼─────┼─────┼─────┼─────┼─────┤
+      * │^C   │Alt/A│Sft/S│Ctl/D│ F/L1│ G/L4│       │ H/L4│ J/L1│Ctl/K│Sft/L│Alt/;│ '/` │
+      * ├─────┼─────┼─────┼─────┼─────┼─────┤       ├─────┼─────┼─────┼─────┼─────┼─────┤A
+      * │^V   │  Z  │  X  │Gui/C│ V/L3│ B/| │       │ N/& │ M/L3│Gui/,│  .  │ /,  │  _  │
+      * └─────┴─────┴─────┴─────┴─────┴─────┘       └─────┴─────┴─────┴─────┴─────┴─────┘
+      *                   ┌─────┬─────┬─────┐       ┌─────┬─────┬─────┐
+      *                   │^S/^C│W/LR │ Tab │       │ Spc │ Ent │ Bsp │
+      *                   └─────┴─────┴─────┘       └─────┴─────┴─────┘
       */
 
     [0] = LAYOUT_split_3x6_3(
@@ -429,8 +428,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         KC_TRNS,        KC_TRNS,        KC_TAB,         KC_TRNS,        KC_TRNS,        KC_TRNS
     ),
 
+      /*
+      * Layer 4: Unicode Emoji & Special Characters
+      * ┌─────┬─────┬─────┬─────┬─────┬─────┐       ┌─────┬─────┬─────┬─────┬─────┬─────┐
+      * │ 🙉  │ 💀  │ 😲  │ ❤️  │ 🤖  │ 🤯  │       │     │  Ä  │  Ö  │  Ü  │     │PScrn│
+      * ├─────┼─────┼─────┼─────┼─────┼─────┤       ├─────┼─────┼─────┼─────┼─────┼─────┤
+      * │ 🙈  │ 💩  │ Sft │ 😉  │ 🤜  │ 💥  │       │     │ä/Ä  │ö/Ö  │ü/Ü  │  E  │     │
+      * ├─────┼─────┼─────┼─────┼─────┼─────┤       ├─────┼─────┼─────┼─────┼─────┼─────┤
+      * │ 🙊  │ 😭  │ 🍟  │ 🐛  │ 😬  │ 🙂  │       │     │     │     │     │     │UCnxt│
+      * └─────┴─────┴─────┴─────┴─────┴─────┘       └─────┴─────┴─────┴─────┴─────┴─────┘
+      *                   ┌─────┬─────┬─────┐       ┌─────┬─────┬─────┐
+      *                   │     │     │ Tab │       │     │     │     │
+      *                   └─────┴─────┴─────┘       └─────┴─────┴─────┘
+      */
+
     [4] = LAYOUT_split_3x6_3(
-        UM(HEARNOEVIL),         UM(SKULL),       UM(ASTONISHED),  UM(HEART),      UM(ROBOT),      UM(HEXPLODE),     KC_NO,        UM(DEBAE),        UM(DEBOE),        UM(DEBUE),        KC_NO,        KC_PSCR,
+        UM(HEARNOEVIL),         UM(SKULL),       KC_LBRC,         KC_LCBR,        KC_LPRN,        KC_LT,            KC_GT,        KC_RPRN,          KC_RCBR,          KC_RBRC,          KC_NO,        KC_PSCR,
         UM(SEENOEVIL),          UM(POOP),        KC_LSFT,         UM(WINK),       UM(FISTBOX),    UM(EXPLODE),      KC_NO,        UP(DESAE, DEBAE), UP(DESOE, DEBOE), UP(DESUE, DEBUE), KC_E,         KC_NO,
         UM(SPEAKNOEVIL),        UM(CRY),         UM(FRIES),       UM(BUG),        UM(GRIMACE),    UM(SMILE),        KC_NO,        KC_NO,            KC_NO,            KC_NO,            KC_NO,        UC_NEXT,
                                                                   KC_TRNS,        KC_NO,          KC_TAB,           KC_TRNS,      KC_TRNS,          KC_TRNS
