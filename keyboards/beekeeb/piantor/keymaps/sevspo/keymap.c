@@ -409,7 +409,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT_split_3x6_3(
         KC_ESC,         TD(TD_Q_3EQ),   TD(TD_W_LBRC),  TD(TD_E_LCBR),  TD(TD_R_LPRN),  TD(TD_T_LT),    TD(TD_Y_GT),    TD(TD_U_RPRN),  TD(TD_I_RCBR),  TD(TD_O_RBRC),  TD(TD_P_ARRF),  TD(TD_DASH_EQ),
-        LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(1,KC_F),     LT(4,KC_G),     LT(4,KC_H),     LT(1,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
+        LCTL(KC_C),     LALT_T(KC_A),   LSFT_T(KC_S),   LCTL_T(KC_D),   LT(1,KC_F),     LT(4,KC_G),     LT(1,KC_H),     LT(4,KC_J),     RCTL_T(KC_K),   RSFT_T(KC_L),   RALT_T(KC_SCLN),TD(TD_QUOT_GRV),
         LCTL(KC_V),     KC_Z,           KC_X,           LGUI_T(KC_C),   LT(3,KC_V),     TD(TD_B_OR),    TD(TD_N_AND),   LT(3,KC_M),     RGUI_T(KC_COMM),KC_DOT,         TD(TD_SLSH_CMM),KC_UNDS,
                                                         TD(TD_CTRLS_C), TD(TD_W_LR),    KC_TAB,         KC_SPACE,       KC_ENT,         KC_BSPC
     ),
@@ -443,9 +443,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       */
 
     [4] = LAYOUT_split_3x6_3(
-        UM(HEARNOEVIL),         UM(SKULL),       KC_LBRC,         KC_LCBR,        KC_LPRN,        KC_LT,            KC_GT,        KC_RPRN,          KC_RCBR,          KC_RBRC,          KC_NO,        KC_PSCR,
-        UM(SEENOEVIL),          UM(POOP),        KC_LSFT,         UM(WINK),       UM(FISTBOX),    UM(EXPLODE),      KC_NO,        UP(DESAE, DEBAE), UP(DESOE, DEBOE), UP(DESUE, DEBUE), KC_E,         KC_NO,
-        UM(SPEAKNOEVIL),        UM(CRY),         UM(FRIES),       UM(BUG),        UM(GRIMACE),    UM(SMILE),        KC_NO,        KC_NO,            KC_NO,            KC_NO,            KC_NO,        UC_NEXT,
-                                                                  KC_TRNS,        KC_NO,          KC_TAB,           KC_TRNS,      KC_TRNS,          KC_TRNS
+        UM(HEARNOEVIL),         UM(SKULL),       KC_LBRC,         KC_LCBR,        KC_LPRN,        KC_LT,            KC_GT,        KC_RPRN,          KC_RCBR,          KC_RBRC,          KC_TRNS,      KC_PSCR,
+        UM(SEENOEVIL),          UM(POOP),        KC_RBRC,         KC_RCBR,        KC_RPRN,        KC_GT,            KC_TRNS,      UP(DESAE, DEBAE), UP(DESOE, DEBOE), UP(DESUE, DEBUE), KC_E,         KC_TRNS,
+        UM(SPEAKNOEVIL),        UM(CRY),         UM(FRIES),       UM(BUG),        UM(GRIMACE),    UM(SMILE),        KC_TRNS,      KC_TRNS,          KC_TRNS,          KC_TRNS,          KC_TRNS,      UC_NEXT,
+                                                                  KC_TRNS,        KC_TRNS,        KC_TAB,           KC_TRNS,      KC_TRNS,          KC_TRNS
     ),
 };
